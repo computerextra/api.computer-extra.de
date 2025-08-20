@@ -1,12 +1,12 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
 require "../vendor/autoload.php";
-
-use App\Helpers\CorsUtil;
-
-$CorsUil = new CorsUtil();
-
-Flight::before("start", [$CorsUil, "setupCors"]);
 
 require "../routes/api.php";
 
