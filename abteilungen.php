@@ -1,13 +1,52 @@
 <?php
+
 header('Access-Control-Allow-Origin: *');
-header("Content-Type:application/json");
-require_once "./config.php";
-require_once "./api.php";
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json; charset=utf-8');
 
-$api = new API();
+require __DIR__ . "/vendor/autoload.php";
 
-if (!empty($_POST)) {
-    echo json_encode($api->get_abteilungen());
-} else {
-    echo json_encode($api->method_not_allowed());
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+define("DB_USER", $_ENV["DB_USER"]);
+define("DB_HOST", $_ENV["DB_HOST"]);
+define("DB_PASSWORD", $_ENV["DB_PASSWORD"]);
+define("DB_NAME", $_ENV["DB_NAME"]);
+define("DB_CHARSET", $_ENV["DB_CHARSET"]);
+
+// Verbindung zur Datenbank herstellen
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+// Fehlerbehandlung bei der Verbindung
+if ($conn->connect_error) {
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Database connection failed: " . $conn->connect_error
+    ]);
+    exit;
 }
+
+// SQL-Abfrage
+$sql = "SELECT * FROM `Abteilung` ORDER BY `index` ASC";
+$res = $conn->query($sql);
+
+if (!$res) {
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Query failed: " . $conn->error
+    ]);
+    exit;
+}
+
+// Daten als JSON zurückgeben
+$data = $res->fetch_all(MYSQLI_ASSOC);
+
+echo json_encode([
+    "status" => "success",
+    "num_rows" => $res->num_rows,
+    "data" => $data
+]);
