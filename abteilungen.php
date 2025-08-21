@@ -36,7 +36,6 @@ header('Content-Type: application/json; charset=utf-8');
 
 require __DIR__ . "/vendor/autoload.php";
 
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -59,8 +58,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-echo json_encode(["debug" => "DB-Verbindung erfolgreich"]); // Debug
-
 // SQL-Abfrage
 $sql = "SELECT * FROM `Abteilung` ORDER BY `index` ASC";
 $res = $conn->query($sql);
@@ -73,9 +70,6 @@ if (!$res) {
     ]);
     exit;
 }
-
-echo json_encode(["debug" => "SQL erfolgreich"]); // Debug
-
 
 // Daten als JSON zurückgeben
 $data = $res->fetch_all(MYSQLI_ASSOC);
