@@ -5,10 +5,10 @@ require_once "./config.php";
 require_once "./api.php";
 
 // Get Server Action
-$action = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'];
 $api = new API();
 
-switch ($action) {
+switch ($method) {
     case "GET": {
         echo json_encode($api->get_abteilungen());
         break;
