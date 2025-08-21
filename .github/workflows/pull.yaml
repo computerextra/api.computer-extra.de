@@ -1,0 +1,27 @@
+name: Pull newest Push to Server
+
+on:
+  push:
+    braches: ["main"]
+
+  steps:
+    - name: "Configure SSH"
+      env:
+        SSH_USER: ${{ secrets.SSH_USER }}
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        SSH_HOST: ${{ secrets.SSH_IP }}
+      run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/external-machine.key
+          chmod 600 ~/.ssh/external-machine.key
+          cat >>~/.ssh/config <<END
+          Host external-machine
+            HostName $SSH_HOST
+            User $SSH_USER
+            Port 22
+            IdentityFile ~/.ssh/external-machine.key
+            StrictHostKeyChecking no
+          END
+
+      - name: "Deploy"
+        run: ssh external-machine "cd /www/htdocs/w0109bd9/api.computer-extra.de && git fetch && git pull"
