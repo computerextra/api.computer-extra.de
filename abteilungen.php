@@ -35,6 +35,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
 require __DIR__ . "/vendor/autoload.php";
+echo json_encode(["debug" => "autoload geladen"]);
+exit;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
