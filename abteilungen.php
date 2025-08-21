@@ -5,10 +5,8 @@ require_once "./config.php";
 require_once "./api.php";
 
 // Get Server Action
-$action = $_GET["action"] ?? "";
+$action = $_SERVER['REQUEST_METHOD'];
 $api = new API();
-
-echo $action;
 
 switch ($action) {
     case "GET": {
