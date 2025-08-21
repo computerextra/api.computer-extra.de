@@ -4,17 +4,10 @@ header("Content-Type:application/json");
 require_once "./config.php";
 require_once "./api.php";
 
-// Get Server Action
-$method = $_SERVER['REQUEST_METHOD'];
 $api = new API();
 
-switch ($method) {
-    case "GET": {
-        echo json_encode($api->get_abteilungen());
-        break;
-    }
-    default: {
-        echo json_encode($api->method_not_allowed());
-        break;
-    }
+if (!empty($_POST)) {
+    echo json_encode($api->get_abteilungen());
+} else {
+    echo json_encode($api->method_not_allowed());
 }
