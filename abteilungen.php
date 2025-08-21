@@ -8,6 +8,8 @@ require_once "./api.php";
 $action = $_GET["action"] ?? "";
 $api = new API();
 
+echo $action;
+
 switch ($action) {
     case "GET": {
         echo json_encode($api->get_abteilungen());
