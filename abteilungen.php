@@ -1,8 +1,24 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
+
+set_exception_handler(function ($e) {
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
+        "message" => $e->getMessage()
+    ]);
+    exit;
+});
+
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
+        "message" => "$errstr in $errfile on line $errline"
+    ]);
+    exit;
+});
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
