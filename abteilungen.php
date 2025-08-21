@@ -11,8 +11,10 @@ $api = new API();
 switch ($action) {
     case "GET": {
         echo json_encode($api->get_abteilungen());
+        break;
     }
     default: {
         echo json_encode($api->method_not_allowed());
+        break;
     }
 }
