@@ -20,6 +20,15 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     exit;
 });
 
+// OPTIONS-Request abfangen
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Content-Type: application/json; charset=utf-8');
+    exit(0);
+}
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
