@@ -33,7 +33,7 @@ try {
 
 // Abfrage ausführen
 try {
-    $stmt = $pdo->prepare("SELECT * FROM `Angebot` WHERE anzeigen = 1 ORDER BY date_start ASC");
+    $stmt = $pdo->prepare("SELECT * FROM `Angebot` WHERE anzeigen = 1 ORDER BY date_stop ASC");
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
