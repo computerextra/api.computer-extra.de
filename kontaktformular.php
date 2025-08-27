@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-echo json_decode($_POST);
+echo json_encode($_POST);
 exit();
 
 //Prüfsumme
