@@ -86,7 +86,7 @@ try {
 
     $mail->Subject = "Neue Kontaktanfrage von $name";
     $mail->CharSet = 'UTF-8';
-    $mail->Body = "<hr>SIE HABEN EINE KONTAKTANFRAGE ERHALTEN<hr><br><br>Nachfolgende die Details der Anfrage:<br><br><b>Name:</b> $name<br><b>Email:</b> $email<br><br><b>Nachricht:</b><br>$Nachricht";
+    $mail->Body = "<hr>SIE HABEN EINE KONTAKTANFRAGE ERHALTEN<hr><br><br>Nachfolgende die Details der Anfrage:<br><br><b>Name:</b> $name<br><b>Telefon:</b> $number<br><b>Email:</b> $email<br><br><b>Nachricht:</b><br>$Nachricht";
     $mail->send();
 
     echo json_encode(["message" => "E-Mail erfolgreich gesendet", "status" => 200]);
