@@ -17,7 +17,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // Nur POST-Methoden erlauben
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(["error" => "Nur POST-Methoden sind erlaubt"]);
+    echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
     exit();
 }
 
@@ -82,6 +82,7 @@ try {
 
 
     $mail->setFrom($_ENV["SMTP_FROM"], "Kontaktformular");
+    $mail->addAddress($_ENV["SMTP_TO"]);
     $mail->addBCC($_ENV["SMTP_BCC"]);
     $mail->isHTML(true);
 
