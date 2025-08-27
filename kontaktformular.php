@@ -16,7 +16,6 @@ header("Content-Type: application/json; charset=UTF-8");
 
 // Nur POST-Methoden erlauben
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
     echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
     exit();
 }
@@ -61,7 +60,6 @@ if (isset($_POST["Nachricht"])) {
 }
 
 if (!$ok2Send) {
-    http_response_code(400);
     echo json_encode(["message" => "Fehlende oder ungültige Eingabewerte", "status" => 400]);
     exit();
 }
@@ -91,12 +89,10 @@ try {
     $mail->Body = "<hr>SIE HABEN EINE KONTAKTANFRAGE ERHALTEN<hr><br><br>Nachfolgende die Details der Anfrage:<br><br><b>Name:</b> $name<br><b>Email:</b> $email<br><br><b>Nachricht:</b><br>$Nachricht";
     $mail->send();
 
-    http_response_code(200);
     echo json_encode(["message" => "E-Mail erfolgreich gesendet", "status" => 200]);
     exit();
 
 } catch (Exception $e) {
-    http_response_code(500);
     echo json_encode(["message" => $mail->ErrorInfo, "status" => 500]);
     exit();
 }
