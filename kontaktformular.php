@@ -7,10 +7,6 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 
-require 'path/to/PHPMailer/src/Exception.php';
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
-
 // CORS Headers für alle Clients erlauben
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
