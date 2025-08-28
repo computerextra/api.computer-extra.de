@@ -139,10 +139,7 @@ try {
     }
     $body .= "</tr>";
     $body .= "</table>";
-    $body .= '<br><hr><br>Email von: ' . $data["Name"] . '<br>Mail: ' . $data["Mail"] . '<br>Telefon: ' . $data["Phone"] . '<br>Bewerbung als: ' . $data["Job"];
-    if ($data["Job"] === "Ausbildung") {
-        $body .= '<br>Ausbildung: ' . $data["Ausbildung"];
-    }
+    $body .= '<br><hr><br>Email von: ' . $data["Name"] . '<br>Mail: ' . $data["Email"] . '<br>Telefon: ' . $data["Telefon"] . '<br>Bewerbung als: ' . $data["Position"];
 
     $mail->Subject = 'Neue Bewerbung';
     $mail->CharSet = 'UTF-8';
