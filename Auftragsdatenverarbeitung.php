@@ -9,7 +9,7 @@ date_default_timezone_set('Europe/Berlin');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json; charset=UTF-8");
+header("Content-Type: application/pdf; charset=UTF-8");
 
 // Nur POST-Methoden erlauben
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -29,6 +29,8 @@ $Vertretungsberechtigter = $_POST["Vertretungsberechtigter"];
 
 
 $mpdf = new Mpdf();
+
+$mpdf->PDFA = true;
 
 $mpdf->SetTitle('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO'); // add a document title
 $mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
@@ -682,8 +684,6 @@ $body .= `
 //       <p>gez. Markus Barella (Vertretungsberechtigter des Auftraggebers)</p>
 
 $body .= `
-
-
       <p>Kassel, 25.08.2025</p>
       <p>gez. Christian Krauss (Computer Extra GmbH)</p>
     </section>`;
