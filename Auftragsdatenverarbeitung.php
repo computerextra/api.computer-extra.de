@@ -32,10 +32,9 @@ $mpdf = new Mpdf();
 
 $mpdf->PDFA = true;
 
-$mpdf->SetTitle('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO'); // add a document title
 $mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
 $mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
-$mpdf->setFooter('AVV|{DATE F j, Y}|{PAGENO}');
+$mpdf->setFooter('AVV|{DATE d.m.Y}|{PAGENO}');
 
 $body = `
   <h1>
