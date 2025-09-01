@@ -2,6 +2,7 @@
 require_once __DIR__ . "/vendor/autoload.php";
 
 use \Mpdf\Mpdf;
+use \Mpdf\MpdfException;
 
 date_default_timezone_set('Europe/Berlin');
 
@@ -13,8 +14,8 @@ header("Content-Type: application/pdf; charset=UTF-8");
 
 // Nur POST-Methoden erlauben
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
-    exit();
+  echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
+  exit();
 }
 
 $_POST = json_decode(file_get_contents('php://input'), true);
@@ -26,15 +27,6 @@ $Postleitzahl = $_POST["Postleitzahl"];
 $Ort = $_POST["Ort"];
 $Land = $_POST["Land"];
 $Vertretungsberechtigter = $_POST["Vertretungsberechtigter"];
-
-
-$mpdf = new Mpdf();
-
-$mpdf->PDFA = true;
-
-$mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
-$mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
-$mpdf->setFooter('AVV|{DATE d.m.Y}|{PAGENO}');
 
 $body = `
   <h1>
@@ -687,10 +679,25 @@ $body .= `
       <p>gez. Christian Krauss (Computer Extra GmbH)</p>
     </section>`;
 
-$mpdf->WriteHTML($body);
-$date = date('d.m.Y', time());
-$filename = "AVV_$Firma_$date.pdf";
-$mpdf->OutputFile(__DIR__ . "/$filename");
 
-echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
-exit();
+try {
+  $mpdf = new Mpdf();
+
+  $mpdf->PDFA = true;
+
+  $mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
+  $mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
+  $mpdf->setFooter('AVV|{DATE d.m.Y}|{PAGENO}');
+
+  $mpdf->WriteHTML($body);
+  $date = date('d.m.Y', time());
+  $filename = "AVV-$Kundennummer-$date.pdf";
+  $mpdf->OutputFile(__DIR__ . "/$filename");
+
+  echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
+  exit();
+} catch (MpdfException $e) {
+  $msg = $e->getMessage();
+  echo json_encode(["message" => "Fehler: $msg", "filename" => null, "status" => 500]);
+  exit();
+}
