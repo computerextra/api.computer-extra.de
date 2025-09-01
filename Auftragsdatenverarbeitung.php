@@ -690,4 +690,4 @@ $body .= `
 
 $mpdf->WriteHTML($body);
 $date = date('d.m.Y', time());
-$mpdf->Output("AVV_$Firma_$date.pdf", 'D');
+$mpdf->OutputHttpDownload("AVV_$Firma_$date.pdf");
