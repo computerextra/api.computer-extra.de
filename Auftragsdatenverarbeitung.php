@@ -690,4 +690,8 @@ $body .= `
 
 $mpdf->WriteHTML($body);
 $date = date('d.m.Y', time());
-$mpdf->OutputHttpDownload("AVV_$Firma_$date.pdf");
+$filename = "AVV_$Firma_$date.pdf";
+$mpdf->OutputFile(__DIR__ . "/$filename");
+
+echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
+exit();
