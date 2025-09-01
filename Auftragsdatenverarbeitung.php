@@ -10,23 +10,23 @@ date_default_timezone_set('Europe/Berlin');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/pdf; charset=UTF-8");
+header("Content-Type: application/json; charset=UTF-8");
 
 // Nur POST-Methoden erlauben
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
-  exit();
-}
+// if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+//   echo json_encode(["message" => "Nur POST-Methoden sind erlaubt", "status" => 405]);
+//   exit();
+// }
 
-$_POST = json_decode(file_get_contents('php://input'), true);
+// $_POST = json_decode(file_get_contents('php://input'), true);
 
-$Kundennummer = $_POST["Kundennummer"];
-$Firma = $_POST["Firma"];
-$Adresse = $_POST["Adresse"];
-$Postleitzahl = $_POST["Postleitzahl"];
-$Ort = $_POST["Ort"];
-$Land = $_POST["Land"];
-$Vertretungsberechtigter = $_POST["Vertretungsberechtigter"];
+// $Kundennummer = $_POST["Kundennummer"];
+// $Firma = $_POST["Firma"];
+// $Adresse = $_POST["Adresse"];
+// $Postleitzahl = $_POST["Postleitzahl"];
+// $Ort = $_POST["Ort"];
+// $Land = $_POST["Land"];
+// $Vertretungsberechtigter = $_POST["Vertretungsberechtigter"];
 
 $body = `
   <h1>
@@ -692,12 +692,13 @@ try {
   $mpdf->WriteHTML($body);
   $date = date('d.m.Y', time());
   $filename = "AVV-$Kundennummer-$date.pdf";
-  $mpdf->OutputFile(__DIR__ . "/$filename");
+  // $mpdf->OutputFile(__DIR__ . "/$filename");
+  $mpdf->Output();
 
-  echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
+  // echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
   exit();
 } catch (MpdfException $e) {
   $msg = $e->getMessage();
   echo json_encode(["message" => "Fehler: $msg", "filename" => null, "status" => 500]);
-  exit();
+  // exit();
 }
