@@ -681,7 +681,7 @@ $body .= `
 
 
 try {
-  $mpdf = new Mpdf();
+  $mpdf = new Mpdf(["format" => "A4", 'mode' => 'utf-8']);
 
   $mpdf->PDFA = true;
 
