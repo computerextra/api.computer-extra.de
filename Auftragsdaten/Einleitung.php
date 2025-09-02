@@ -2,6 +2,11 @@
 
 function Einleitung(string $Kundennummer, string $Firma, string $Adresse, string $Ort): string
 {
+    $Kundennummer = htmlspecialchars($Kundennummer);
+    $Firma = htmlspecialchars($Firma);
+    $Adresse = htmlspecialchars($Adresse);
+    $Ort = htmlspecialchars($Ort);
+
     return `<bookmark content="Einleitung" />
     <h1>
       Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO
