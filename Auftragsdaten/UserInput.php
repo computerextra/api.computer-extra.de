@@ -50,6 +50,7 @@ function Unterschrift(string $Ort, string $Vertretungsberechtigter): string
     <p></p>
     <p>Kassel, $heute</p>
     <p>Christian Krauss (Computer Extra GmbH)</p>
+    <p>[Diese Vereinbarung ist ohne Unterschrift gültig]</p>
   HTML;
   return $body;
 }
