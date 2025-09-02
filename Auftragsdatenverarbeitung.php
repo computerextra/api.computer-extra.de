@@ -125,7 +125,7 @@ function sendMail()
     $mail->setFrom("noreply@computer-extra.de", "Computer Extra GmbH");
     $mail->addAddress($EMail);
     $mail->addBCC($_ENV["SMTP_DATENSCHUTZ"]);
-    $mail->addBCC($_ENV["SMTP_BEWERBUNG"]);
+    // $mail->addBCC($_ENV["SMTP_BEWERBUNG"]);
     $mail->isHTML(true);
 
     $mail->Subject = "Neue Vereinbarung zur Auftragsverarbeitung";
