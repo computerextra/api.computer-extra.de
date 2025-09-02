@@ -29,4 +29,7 @@ jobs:
           END
 
       - name: "Deploy"
-        run: ssh external-machine "cd /www/htdocs/w0109bd9/api.computer-extra.de && git fetch && git pull && git submodule init && git submodule update"
+        run: ssh external-machine "cd /www/htdocs/w0109bd9/api.computer-extra.de && git fetch && git pull"
+
+      - name: Sync Submodules
+        run: ssh external-machine "cd /www/htdocs/w0109bd9/api.computer-extra.de && git pull --recurse-submodules && git submodule update --remote --recursive
