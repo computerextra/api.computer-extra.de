@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Berlin');
 
 // CORS Headers für alle Clients erlauben
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+// header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
