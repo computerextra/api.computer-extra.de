@@ -41,7 +41,7 @@ try {
 
   $mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
   $mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
-  $mpdf->setFooter('AVV|{DATE d.m.Y}|{PAGENO}');
+  $mpdf->setFooter('Computer Extra GmbH|Stand: {DATE d.m.Y (HH:MM)}|{PAGENO}');
 
   $mpdf->WriteHTML(Einleitung("D12345", "TestFirma", "Harleshäuser Str. 8", "34130 Kassel"));
 
