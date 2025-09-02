@@ -37,13 +37,13 @@ function A_1(): string
     </p>
     <ul>
         <li style="display: inline-flex; gap: 0.5rem;">
-            <input style="checkbox" checked />Auftragsverarbeitung in unserem Warenwirtschaftssystem und Intranet</li>
-        <li><input style="checkbox" checked />Durchführung von Fernwartungen</li>
-        <li><input style="checkbox" checked />Elektronische Datenverarbeitung zur Bestellabwicklung sowie Warenlieferung</li>
-        <li><input style="checkbox" checked />Support Tätigkeiten bei Problemen und Störungen</li>
-        <li><input style="checkbox" checked />Verwaltung von Securepoint Firewalls und deren Lizenzen</li>
-        <li><input style="checkbox" checked />Durchführung von Datensicherungen und Datenvernichtungen</li>
-        <li><input style="checkbox" checked />Versand von Waren mittels Versanddienstleister</li>
+            <input type="checkbox" checked disabled />Auftragsverarbeitung in unserem Warenwirtschaftssystem und Intranet</li>
+        <li><input type="checkbox" checked disabled />Durchführung von Fernwartungen</li>
+        <li><input type="checkbox" checked disabled />Elektronische Datenverarbeitung zur Bestellabwicklung sowie Warenlieferung</li>
+        <li><input type="checkbox" checked disabled />Support Tätigkeiten bei Problemen und Störungen</li>
+        <li><input type="checkbox" checked disabled />Verwaltung von Securepoint Firewalls und deren Lizenzen</li>
+        <li><input type="checkbox" checked disabled />Durchführung von Datensicherungen und Datenvernichtungen</li>
+        <li><input type="checkbox" checked disabled />Versand von Waren mittels Versanddienstleister</li>
     </ul>
     HTML;
     return $body;
