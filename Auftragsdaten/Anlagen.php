@@ -35,7 +35,7 @@ function A_1(): string
         Der Auftrag des Auftraggebers an den Auftragnehmer und dessen Unterauftragnehmer
         umfasst folgende Arbeiten und/oder Leistungen:
     </p>
-    <ul>
+    <ul class="check" style="list-style-type: none !important;">
         <li style="display: inline-flex; gap: 0.5rem;">
             <input type="checkbox" checked disabled />Auftragsverarbeitung in unserem Warenwirtschaftssystem und Intranet</li>
         <li><input type="checkbox" checked disabled />Durchführung von Fernwartungen</li>
