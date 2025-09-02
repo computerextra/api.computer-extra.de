@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 require_once __DIR__ . "/vendor/autoload.php";
 
 require __DIR__ . "/Auftragsdaten/Einleitung.php";
+require __DIR__ . "/Auftragsdaten/Sections.php";
 
 use \Mpdf\Mpdf;
 use \Mpdf\MpdfException;
@@ -41,63 +42,16 @@ try {
 
   $mpdf->SetAuthor('Computer Extra GmbH'); // add the author name
   $mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
-  $mpdf->setFooter('Computer Extra GmbH|Stand: {DATE d.m.Y (H:i)}|{PAGENO}');
+  $mpdf->setFooter('Computer Extra GmbH|Stand: {DATE d.m.Y (H:i)}|Seite: {PAGENO}');
 
   $mpdf->WriteHTML(Einleitung("D12345", "TestFirma", "Harleshäuser Str. 8", "34130 Kassel"));
+  $mpdf->WriteHTML(Präambel());
+  $mpdf->WriteHTML(Definitionen());
 
 
-  //     <section id="Präambel">
-//       <h2>Präambel</h2>
-//       <p>
-//         Diese Vereinbarung konkretisiert die datenschutzrechtlichen
-//         Verpflichtungen der Vertragsparteien, die sich aus der in dieser
-//         Vereinbarung und der in <strong>Anlage A</strong> beschriebenen
-//         Auftragsverarbeitung ergeben. Sie findet Anwendung auf alle Tätigkeiten,
-//         die mit der Dienstleistung in Zusammenhang stehen und bei denen
-//         Mitarbeiter des Auftragnehmers oder durch den Auftragnehmer beauftragte
-//         Dritte mit personenbezogenen Daten des Auftraggebers in Berührung kommen
-//         können.
-//       </p>
-//       <p>
-//         Einzelvereinbarungen in dieser Datenschutzvereinbarung gehen den
-//         Allgemeinen Geschäftsbedinungen (AGB) des Auftragnehmers vor.
-//       </p>
-//     </section>
-//     <bookmark content="§ 1 Definitionen" />
-//     <section id="§ 1 Definitionen">
-//       <h2>§ 1 Definitionen</h2>
-//       <ol>
-//         <li>
-//           Personenbezogene Daten <br />
-//           Nach Art. 4 (1) DS-GVO sind personenbezogene Daten alle Informationen,
-//           die sich auf eine identifizierte oder identifizierbare natürliche
-//           Person (im Folgenden "betroffene Person") beziehen; als
-//           identifizierbar wird eine natürliche Person angesehen, die direkt oder
-//           indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem
-//           Namen, zu einer Kennnummer, zu Standortdaten, zu einer Online-Kennung
-//           oder zu einem oder mehreren besonderen Merkmalen identifiziert werden
-//           kann, die Ausdruck der physischen, physiologischen, genetischen,
-//           psychischen, wirtschaftlichen, kulturellen oder sozialen Identität
-//           dieser natürlichen Person sind.
-//         </li>
-//         <li>
-//           Auftragsverarbeiter <br />
-//           Nach Art. 4 (8) DS-GVO ist ein Auftragsverarbeiter eine natürliche
-//           oder juristische Person, Behörde, Einrichtung oder andere Stelle, die
-//           personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.
-//         </li>
-//         <li>
-//           Weisung <br />
-//           Weisung ist die auf einen bestimmten datenschutzmäßigen Umgang (zum
-//           Beispiel Speicherung, Pseudonymisierung, Löschung, Herausgabe) des
-//           Auftragnehmers mit personenbezogenen Daten gerichtete in der Regel
-//           schriftliche Anordnung des Auftraggebers. Die Weisungen werden vom
-//           Auftraggeber erteilt und können durch einzelne Weisungen geändert,
-//           ergänzt oder ersetzt werden (Einzelweisung). Die Weisungen des
-//           Auftraggebers sind schriftlich oder per E-Mail zu erteilen.
-//         </li>
-//       </ol>
-//     </section>
+
+
+  //     </section>
 //     <section id="§ 2 Anwendungsbereich und Verantwortlichkeit">
 //       <h2>§ 2 Anwendungsbereich und Verantwortlichkeit</h2>
 //       <ol>
