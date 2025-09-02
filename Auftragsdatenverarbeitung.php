@@ -87,9 +87,6 @@ function createPdf()
     $date = date('d.m.Y', time());
     $filename = "AVV-$Kundennummer-$date.pdf";
     $mpdf->OutputFile(__DIR__ . "/AVV/$filename");
-
-    echo json_encode(["message" => "PDF Erfolgreich erstellt.", "filename" => $filename, "status" => 200]);
-    exit();
   } catch (MpdfException $e) {
     $msg = $e->getMessage();
     echo json_encode(["message" => "Fehler: $msg", "filename" => null, "status" => 500]);
