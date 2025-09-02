@@ -1,0 +1,3 @@
+[submodule "oem-logo"]
+	path = oem-logo
+	url = https://github.com/computerextra/oem-logo
