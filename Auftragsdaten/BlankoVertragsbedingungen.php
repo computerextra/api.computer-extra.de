@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "/Auftragsdaten/UserInput.php";
-require __DIR__ . "/Auftragsdaten/Sections.php";
+require __DIR__ . "/UserInput.php";
+require __DIR__ . "/Sections.php";
 
 date_default_timezone_set('Europe/Berlin');
 
