@@ -20,9 +20,17 @@ function Anlage_A(): string
 
 function Anlage_B(): string
 {
+    $b1 = B_1();
+    $b2 = B_2();
+    $b3 = B_3();
+    $b4 = B_4();
     $body = <<<HTML
     <h1>Anlage B: Technische und organisatorische Maßnahmen</h1>
-
+    <h2>Standardmaßnahme nach DSGVO</h2>
+    $b1
+    $b2
+    $b3
+    $b4
     HTML;
     return $body;
 }
@@ -286,6 +294,420 @@ function A_5(): string
         meetergo GmbH - Hansaring 61, 50670 Köln (Online Beratungstermine
         Verwaltung)
     </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1(): string
+{
+    $b1 = B_1_1();
+    $b2 = B_1_2();
+    $b3 = B_1_3();
+    $b4 = B_1_4();
+    $b5 = B_1_5();
+    $b6 = B_1_6();
+
+
+    $body = <<<HTML
+    <h2>1. Vertraulichkeit</h2>
+    $b1
+    $b2
+    $b3
+    $b4
+    $b5
+    $b6
+    HTML;
+    return $body;
+}
+
+function B_1_1(): string
+{
+    $body = <<<HTML
+    <h3>1.1 Zutrittskontrolle</h3>
+    <p>
+        Unbefugten ist der Zutritt zu den zwecks Erbringung der Verarbeitung genutzten
+        technischen Einrichtungen zu verwehren.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Manuelles Schließsystem - Manuelles Schließsystem mit Schließzylinder
+        </li>
+        <li>
+            Schlüsselverwaltung - Schlüsselregelung mit Dokumentation der Schlüssel (z. B.
+            Schlüsselbuch)
+        </li>
+        <li>
+             Videoüberwachung - Videoüberwachung der Zugänge
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1_2(): string
+{
+    $body = <<<HTML
+     <h3>1.2 Zugangskontrolle</h3>
+    <p>
+        Es ist zu verhindern, dass die zur Erbringung der beschriebenen IT-Dienstleistung
+        notwendigen Einrichtungen (Hardware, Betriebssysteme, Software) von Unbefugten genutzt
+        werden können.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Authentifikation mit Benutzer + Passwort
+        </li>
+        <li>
+            Benutzerberechtigungen - Benutzerberechtigungen verwalten (z.B. bei Eintritt, Änderung,
+            Austritt)
+        </li>
+        <li>
+             Firewall - Einsatz von Firewalls zum Schutz des Netzwerkes
+        </li>
+         <li>
+             Sorgfältige Personalauswahl - Sorgfältige Auswahl von Reinigungspersonal und
+            Sicherheitspersonal
+        </li>
+         <li>
+             Sperren von externen Schnittstellen - Sperren von externen Schnittstellen (z.B.
+            USB-Anschlüsse)
+        </li>
+         <li>
+            Verschlüsselung von Datenträgern - Verschlüsselung von Datenträgern mit dem Stand der
+            Technik entsprechenden Verfahren
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1_3(): string
+{
+    $body = <<<HTML
+     <h3>1.3 Zugriffskontrolle</h3>
+    <p>
+        Es ist sicherzustellen, dass die zur Benutzung eines Datenverarbeitungssystems
+        Berechtigten ausschließlich auf die ihrer Zugriffsberechtigung unterliegenden Daten
+        zugreifen können, und dass personenbezogene Daten bei der Verarbeitung, Nutzung und
+        nach der Speicherung nicht unbefugt gelesen, kopiert oder verändert werden können.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Berechtigungskonzept - Erstellen und Einsatz eines Berechtigungskonzepts
+        </li>
+        <li>
+            Datenlöschung - Sichere Löschung von Datenträgern vor deren Wiederverwendung (z.B.
+            durch mehrfaches Überschreiben)
+        </li>
+        <li>
+             Einsatz von Aktenvernichtern - Einsatz von Aktenvernichtern (min. Sicherheitsstufe 3 und
+            Schutzklasse 2)
+        </li>
+        <li>
+            Einsatz von Dienstleistern - Einsatz von Dienstleistern zur Akten- und Datenvernichtung
+            (nach Möglichkeit mit DIN 66399 Zertifikat)
+        </li>
+        <li>
+            Sichere Aufbewahrung - Sichere Aufbewahrung von Datenträgern
+        </li>
+        <li>
+            Verschlüsselung von Datenträgern - Verschlüsselung von Datenträgern mit dem Stand der
+            Technik entsprechenden Verfahren
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1_4(): string
+{
+    $body = <<<HTML
+    <h3>1.4 Weitergabekontrolle</h3>
+    <p>
+        Es muss dafür gesorgt werden, dass personenbezogene Daten bei der elektronischen
+        Übertragung oder während ihres Transports oder ihrer Speicherung auf Datenträger nicht
+        unbefugt gelesen, kopiert, verändert oder entfernt werden können, und dass überprüft und
+        festgestellt werden kann, an welchen Stellen die Übermittlung personenbezogener Daten
+        durch Einrichtungen zur Datenübertragung vorgesehen ist.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            E-Mail-Verschlüsselung - E-Mail-Verschlüsselung mit S/MIME oder PGP Verfahren (oder
+            anderen, dem Stand der Technik entsprechenden Verfahren)
+        </li>
+        <li>
+            SSL / TLS Verschlüsselung - Einsatz von SSL-/TLS-Verschlüsselung bei der
+            Datenübertragung im Internet
+        </li>
+        <li>
+             VPN-Tunnel - Einrichtungen von VPN-Tunneln zur Einwahl ins Netzwerk von außen
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1_5(): string
+{
+    $body = <<<HTML
+    <h3>1.5 Trennungskontrolle</h3>
+    <p>
+       Es ist sicherzustellen, dass zu unterschiedlichen Zwecken erhobene Daten getrennt
+        verarbeitet werden können.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Logische Mandantentrennung - Logische Mandantentrennung (softwareseitig)
+        </li>
+        <li>
+            Physikalische Trennung der Daten - Physikalisch getrennte Speicherung auf gesonderten
+            Systemen oder Datenträgern
+        </li>
+        <li>
+             Produktiv- und Testsystem - Trennung von Produktiv- und Testsystem
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_1_6(): string
+{
+    $body = <<<HTML
+    <h3>1.6 Verschlüsselung</h3>
+    <p>
+        Die Verarbeitung personenbezogener Daten soll in einer Weise erfolgen, die eine
+        unbeabsichtigte oder unrechtmäßige oder unbefugte Offenlegung dieser verhindert. Hierzu
+        dienen dem Stand der Technik entsprechende und als sicher geltende
+        Verschlüsselungsmechanismen.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Speicherung - Verschlüsselte Datenspeicherung (z.B. Dateiverschlüsselung nach AES256
+            Standard)
+        </li>
+        <li>
+            Übertragung - Verschlüsselte Datenübertragung (z.B. E-Mailverschlüsselung nach PGP
+            oder S/Mime, VPN, verschlüsselte Internetverbindungen mittels TLS/SSL, Einsatz FTAPI -
+            Datentransfertool)
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_2(): string
+{
+    $b1 = B_2_1();
+
+    $body = <<<HTML
+    <h2>2. Integrität</h2>
+    $b1
+    HTML;
+    return $body;
+}
+
+function B_2_1(): string
+{
+    $body = <<<HTML
+    <h3>2.1 Eingabekontrolle</h3>
+    <p>
+        Es muss nachträglich geprüft und festgestellt werden können, ob und von wem
+        personenbezogene Daten in Datenverarbeitungssysteme eingegeben, verändert oder entfernt worden sind.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Personalisierte Benutzernamen - Nachvollziehbarkeit von Eingabe, Änderung und
+            Löschung von Daten durch individuelle Benutzernamen (nicht Benutzergruppen)
+        </li>
+        <li>
+           Protokollierung - Protokollierung der Eingabe, Änderung und Löschung von Daten
+        </li>
+         <li>
+           Zugriffsrechte - Personenbezogene Zugriffsrechte zur Nachvollziehbarkeit der Zugriffe.
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_3(): string
+{
+    $b1 = B_3_1();
+    $b2 = B_3_2();
+
+    $body = <<<HTML
+    <h2>3. Verfügbarkeit und Belastbarkeit</h2>
+    $b1
+    $b2
+    HTML;
+    return $body;
+}
+
+function B_3_1(): string
+{
+    $body = <<<HTML
+    <h3>3.1 Verfügbarkeitskontrolle</h3>
+    <p>
+        Es ist dafür Sorge zu tragen, dass personenbezogene Daten gegen zufällige Zerstörung
+        oder Verlust geschützt sind.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Antivirensoftware - Einsatz von Antivirensoftware zum Schutz vor Malware
+        </li>
+        <li>
+           Backup- und Recoverykonzept - Erstellen eines Backup- und Recoverykonzepts
+        </li>
+         <li>
+           Brandmeldeanlagen - Feuer- und Rauchmeldeanlagen
+        </li>
+         <li>
+           Feuerlöschgeräte - CO2 Feuerlöschgeräte in Serverräumen
+        </li>
+         <li>
+           Klimaanlage - Klimaanlage in Serverräumen
+        </li>
+         <li>
+           Redundante Datenhaltung - Redundante Datenhaltung (z.B. gespiegelte Festplatten,
+            RAID 1 oder höher, gespiegelter Serverraum)
+        </li>
+         <li>
+           Schutzsteckdosenleisten - Schutzsteckdosenleisten in Serverräumen
+        </li>
+         <li>
+           Unterbrechungsfreie Stromversorgung - (USV) Unterbrechungsfreie Stromversorgung
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_3_2(): string
+{
+    $body = <<<HTML
+    <h3>3.2 Rasche Wiederherstellbarkeit</h3>
+    <p>
+        Es müssen Maßnahmen getroffen werden, um Verfügbarkeit der personenbezogenen
+        Daten und den Zugang zu ihnen bei einem physischen oder technischen Zwischenfall rasch
+        wiederherzustellen.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Datenwiederherstellungen - Regelmäßige und dokumentierte Datenwiederherstellungen
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_4(): string
+{
+    $b1 = B_4_1();
+    $b2 = B_4_2();
+
+    $body = <<<HTML
+    <h2>4. Weitere Maßnahmenbereiche</h2>
+    $b1
+    $b2
+    HTML;
+    return $body;
+}
+
+function B_4_1(): string
+{
+    $body = <<<HTML
+    <h3>4.1 Auftragskontrolle</h3>
+    <p>
+        Es muss dafür gesorgt werden, dass personenbezogene Daten, die im Auftrag verarbeitet
+        werden, nur entsprechend den Weisungen des Auftraggebers verarbeitet werden können.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+           Audits - Regelmäßige Datenschutzaudits des betrieblichen Datenschutzbeauftragten
+        </li>
+        <li>
+           Auswahl - Auswahl des Auftragnehmers unter Sorgfaltsgesichtspunkten (insbesondere
+            hinsichtlich Datensicherheit)
+        </li>
+         <li>
+           AV-Vertrag - Abschluss einer Vereinbarung zur Auftragsverarbeitung gem. Art. 28
+            DS-GVO.
+        </li>
+         <li>
+           Laufende Überprüfung - Laufende Überprüfung des Auftragnehmers und seiner Tätigkeiten
+        </li>
+    </ul>
+    HTML;
+    return $body;
+}
+
+function B_4_2(): string
+{
+    $body = <<<HTML
+    <h3>4.2 Datenschutz-Managementsystem</h3>
+    <p>
+        Es muss ein Verfahren zur regelmäßigen Überprüfung, Bewertung und Evaluierung des
+        Datenschutzes und der Wirksamkeit der festgelegten technischen und organisatorischen
+        Maßnahmen implementiert sein.
+    </p>
+    <p>
+        Beim Auftragsverarbeiter umgesetzte Maßnahmen:
+    </p>
+    <ul>
+        <li>
+            Audits - Durchführung regelmäßiger interner Audits
+        </li>
+         <li>
+            DSB - Benennung eines Datenschutzbeauftragten
+        </li>
+         <li>
+            Managementsystem Datenschutz - Managementsystem zum Datenschutz (z.B. in
+            Anlehnung an ISO 27701)
+        </li>
+         <li>
+            Schulung - Schulungen aller zugriffsberechtigten Mitarbeiter. Regelmäßig stattfindende
+            Nachschulungen.
+        </li>
+         <li>
+            Softwaregestützte Tools - Einsatz softwaregestützter Tools zur Einhaltung der
+            datenschutzrechtlichen Anforderungen (z.B. audatis MANAGER)
+        </li>
+         <li>
+            Verpflichtung - Verpflichtung auf die Vertraulichkeit gem. Art. 28 Abs. 3 S. 2 lit. b, Art. 29,
+            Art. 32 Abs. 4 DS-GVO
+        </li>
     </ul>
     HTML;
     return $body;
