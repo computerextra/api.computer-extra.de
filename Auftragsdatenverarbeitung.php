@@ -36,8 +36,8 @@ $Ort = $_POST["Ort"];
 $Vertretungsberechtigter = $_POST["Vertretungsberechtigter"];
 $EMail = $_POST["EMail"];
 
-createPdf();
-sendMail();
+$filename = createPdf();
+sendMail($filename);
 
 echo json_encode(["message" => "Erfolgreich erstellt und versendet", "filename" => $filename, "status" => 200]);
 exit();
@@ -87,6 +87,7 @@ function createPdf()
     $date = date('d.m.Y', time());
     $filename = "AVV-$Kundennummer-$date.pdf";
     $mpdf->OutputFile(__DIR__ . "/AVV/$filename");
+    return $filename;
   } catch (MpdfException $e) {
     $msg = $e->getMessage();
     echo json_encode(["message" => "Fehler: $msg", "filename" => null, "status" => 500]);
@@ -94,7 +95,7 @@ function createPdf()
   }
 }
 
-function sendMail()
+function sendMail(string $filename)
 {
   global $EMail;
   global $Firma;
@@ -162,6 +163,7 @@ function sendMail()
       </em>
     </p>
     HTML;
+    $mail->addAttachment(__DIR__ . "/AVV/$filename", $filename);
     $mail->send();
 
   } catch (Exception $e) {
