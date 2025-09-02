@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . "/vendor/autoload.php";
 
 require __DIR__ . "/Auftragsdaten/Einleitung.php";
@@ -39,9 +43,9 @@ try {
   $mpdf->setHeader('Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO');
   $mpdf->setFooter('AVV|{DATE d.m.Y}|{PAGENO}');
 
-  $mpdf->WriteHTML(Einleitung("D12345", "TestFirma", "Harleshäuser Str. 8", "34130 Kassel"))
+  $mpdf->WriteHTML(Einleitung("D12345", "TestFirma", "Harleshäuser Str. 8", "34130 Kassel"));
 
-//   $body = `
+  //   $body = `
 // <bookmark content="Einleitung" />
 //   <h1>
 //       Datenschutzvereinbarung zur Auftragsverarbeitung gemäß Art. 28 DS-GVO
@@ -49,7 +53,7 @@ try {
 //     <p>zwischen dem Verantwortlichen:</p>
 // `;
 
-//   // TODO: Daten
+  //   // TODO: Daten
 // //  <p>
 // //       Computer Extra GmbH<br />
 // //       Harleshäuser Str. 8<br />
@@ -57,7 +61,7 @@ try {
 // //       (nachstehend Auftraggeber genannt)
 // //     </p>
 
-//   $body = `
+  //   $body = `
 //     <bookmark content="Präambel" />
 //     <section id="Präambel">
 //       <h2>Präambel</h2>
@@ -680,10 +684,10 @@ try {
 //      <section id="Unterschriften">
 // `;
 
-//   // TODO:   <p>Kaufungen, 25.08.2025</p>
+  //   // TODO:   <p>Kaufungen, 25.08.2025</p>
 // //       <p>gez. Markus Barella (Vertretungsberechtigter des Auftraggebers)</p>
 
-//   $body .= `
+  //   $body .= `
 //       <p>Kassel, 25.08.2025</p>
 //       <p>gez. Christian Krauss (Computer Extra GmbH)</p>
 //     </section>`;
