@@ -35,14 +35,15 @@ function A_1(): string
         Der Auftrag des Auftraggebers an den Auftragnehmer und dessen Unterauftragnehmer
         umfasst folgende Arbeiten und/oder Leistungen:
     </p>
-    <ul class="check">
-        <li>Auftragsverarbeitung in unserem Warenwirtschaftssystem und Intranet</li>
-        <li>Durchführung von Fernwartungen</li>
-        <li>Elektronische Datenverarbeitung zur Bestellabwicklung sowie Warenlieferung</li>
-        <li>Support Tätigkeiten bei Problemen und Störungen</li>
-        <li>Verwaltung von Securepoint Firewalls und deren Lizenzen</li>
-        <li>Durchführung von Datensicherungen und Datenvernichtungen</li>
-        <li>Versand von Waren mittels Versanddienstleister</li>
+    <ul>
+        <li style="display: inline-flex; gap: 0.5rem;">
+            <input style="checkbox" checked />Auftragsverarbeitung in unserem Warenwirtschaftssystem und Intranet</li>
+        <li><input style="checkbox" checked />Durchführung von Fernwartungen</li>
+        <li><input style="checkbox" checked />Elektronische Datenverarbeitung zur Bestellabwicklung sowie Warenlieferung</li>
+        <li><input style="checkbox" checked />Support Tätigkeiten bei Problemen und Störungen</li>
+        <li><input style="checkbox" checked />Verwaltung von Securepoint Firewalls und deren Lizenzen</li>
+        <li><input style="checkbox" checked />Durchführung von Datensicherungen und Datenvernichtungen</li>
+        <li><input style="checkbox" checked />Versand von Waren mittels Versanddienstleister</li>
     </ul>
     HTML;
     return $body;
