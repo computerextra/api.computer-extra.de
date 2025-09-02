@@ -168,122 +168,124 @@ function A_5(): string
 {
     $body = <<<HTML
     <h2>5. Eingesetzte Subunternehmer</h2>
-    <p>
-        Folgende Subunternehmer werden von uns eingesetzt.
-    </p>
-    <ul class="check" style="list-style-type: none !important;">
-        <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-           Securepoint GmbH, Bleckeder Landstraße 28, 21337 Lüneburg ((Fern-) Prüfung und
-            Wartung Securepoint)
-        </li>
-        <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Meinhardt Städtereinigung GmbH & Co. KG, Nassaustraße 13-15, 65719
-            Hofheim-Wallau (Aktenvernichtung)
-        </li>
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            audatis Services GmbH, Luisenstraße 1, 32052 Herford (Datenschutzmanager)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Terra Cloud GmbH, Hankamp 2, 32609 Hüllhorst�(Cloud Computing)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Brother International GmbH, Konrad-Adenauer-Allee 1-11, 61118 Bad Vilbel (Direkte
-            Verbrauchsmaterial-Belieferung von Endkunden gemäß Partner MPS
-            Alliance-Einzelverträge)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Systeam GmbH, Industriestraße 8, 96250 Ebensfeld (Dropshipping)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-           Synaxon AG, Falkenstraße 31, 33758 Schloß Holte-Stukenbrock (eProcurement /
-            Management von Beschaffungskonditionen)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            pcvisit Software AG, Manfred-von-Ardenne-Ring 20, 01099 Dresden (Fernwartungen)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Annegrit Schmiedeknecht, Einzelunternehmerin, Obervellmaer Str. 3, 34128 Kassel
-            (IT-Schulungen)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-           Wortmann AG (Leistungen im Bereich Informationstechnologie Produkt & Handel,
-            Service & Dienstleistungen)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Microsoft Corp., Konrad-Zuse-Str.1, 85716 Unterschleißheim
-            (Einsatz und Verwaltung von MS365)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            DHL Paket GmbH, Sträßchensweg 10, 53113 Bonn (Paketversand)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            UNITED PARCEL SERVICE DEUTSCHLAND S.à r.l. & Co. OHG, Görlitzer Straße 1,
-            41460 Neuss (Paketversand)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            General Logistics Systems Germany GmbH & Co. OHG, GLS Germany-Straße 1 - 7,
-            36286 Neuenstein (Paketversand)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            trans-o-flex Express GmbH & Co. KGaA, Hertzstraße 10, 69469 Weinheim
-            (Paketversand)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            G Data CyberDefense AG, Königsallee 178, 44799
-            Bochum (Vertrieb von Waren und Dienstleistungen; Installationsunterstützung; Support;
-            online Awareness-Trainings)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            Intos Electronic AG, Siemensstraße 11, 35394 Gießen (Verwaltung personenbezogener
-            Daten für die Durchführung des Auftrags beziehungsweise zur Abwicklung der
-            Geschäftsbeziehung)
-        </li>
-        
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            AEM Communication GmbH & Co. KG, Obergasse 40-42, 36304 Alsfeld (Wartung und
-            Pflege Kundenmanagement; Bereitstellung SaaS f. Kundenmanagement; Support)
-        </li>
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            ALL-INKL.COM - Neue Medien Münnich, Inhaber René Münnich, Hauptstraße 68B,
-            02742 Friedersdorf (Web Hosting und Vertrieb von Hosting Verträgen)
-        </li>
-          <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle;">
-            <input type="checkbox" checked disabled />
-            meetergo GmbH - Hansaring 61, 50670 Köln (Online Beratungstermine Verwaltung)
-        </li>
+    <p>Folgende Subunternehmer werden von uns eingesetzt.</p>
+    <ul class="check" style="list-style-type: none !important">
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Securepoint GmbH, Bleckeder Landstraße 28, 21337 Lüneburg ((Fern-) Prüfung
+        und Wartung Securepoint)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Meinhardt Städtereinigung GmbH & Co. KG, Nassaustraße 13-15, 65719
+        Hofheim-Wallau (Aktenvernichtung)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        audatis Services GmbH, Luisenstraße 1, 32052 Herford (Datenschutzmanager)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Terra Cloud GmbH, Hankamp 2, 32609 Hüllhorst (Cloud Computing)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Brother International GmbH, Konrad-Adenauer-Allee 1-11, 61118 Bad Vilbel
+        (Direkte Verbrauchsmaterial-Belieferung von Endkunden gemäß Partner MPS
+        Alliance-Einzelverträge)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Systeam GmbH, Industriestraße 8, 96250 Ebensfeld (Dropshipping)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Synaxon AG, Falkenstraße 31, 33758 Schloß Holte-Stukenbrock (eProcurement /
+        Management von Beschaffungskonditionen)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        pcvisit Software AG, Manfred-von-Ardenne-Ring 20, 01099 Dresden
+        (Fernwartungen)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Annegrit Schmiedeknecht, Einzelunternehmerin, Obervellmaer Str. 3, 34128
+        Kassel (IT-Schulungen)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Wortmann AG (Leistungen im Bereich Informationstechnologie Produkt & Handel,
+        Service & Dienstleistungen)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Microsoft Corp., Konrad-Zuse-Str.1, 85716 Unterschleißheim (Einsatz und
+        Verwaltung von MS365)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        DHL Paket GmbH, Sträßchensweg 10, 53113 Bonn (Paketversand)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        UNITED PARCEL SERVICE DEUTSCHLAND S.à r.l. & Co. OHG, Görlitzer Straße 1,
+        41460 Neuss (Paketversand)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        General Logistics Systems Germany GmbH & Co. OHG, GLS Germany-Straße 1 - 7,
+        36286 Neuenstein (Paketversand)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        trans-o-flex Express GmbH & Co. KGaA, Hertzstraße 10, 69469 Weinheim
+        (Paketversand)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        G Data CyberDefense AG, Königsallee 178, 44799 Bochum (Vertrieb von Waren
+        und Dienstleistungen; Installationsunterstützung; Support; online
+        Awareness-Trainings)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        Intos Electronic AG, Siemensstraße 11, 35394 Gießen (Verwaltung
+        personenbezogener Daten für die Durchführung des Auftrags beziehungsweise
+        zur Abwicklung der Geschäftsbeziehung)
+    </li>
+
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        AEM Communication GmbH & Co. KG, Obergasse 40-42, 36304 Alsfeld (Wartung und
+        Pflege Kundenmanagement; Bereitstellung SaaS f. Kundenmanagement; Support)
+    </li>
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        ALL-INKL.COM - Neue Medien Münnich, Inhaber René Münnich, Hauptstraße 68B,
+        02742 Friedersdorf (Web Hosting und Vertrieb von Hosting Verträgen)
+    </li>
+    <li style="display: inline-flex; gap: 0.5rem; vertical-align: middle">
+        <input type="checkbox" checked disabled />
+        meetergo GmbH - Hansaring 61, 50670 Köln (Online Beratungstermine
+        Verwaltung)
+    </li>
     </ul>
     HTML;
     return $body;
