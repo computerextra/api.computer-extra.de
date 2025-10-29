@@ -9,10 +9,12 @@ use MyApi\Service\CacheService;
 use MyApi\Service\ImageService;
 use MyApi\Service\AuditService;
 
-// load config
+// =======================
+// Bootstrap & Konfiguration
+// =======================
 $config = require __DIR__ . '/../config/bootstrap.php';
 
-// security headers & CORS
+// Sicherheitsheader & CORS
 header('Access-Control-Allow-Origin: ' . $config['allowed_origin']);
 header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-API-Key');
@@ -28,18 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// instantiate app
+// App & Services
 $app = new App($config);
+$cache = new CacheService($config['cache']['dir'], $config['cache']['ttl']);
+$imageService = new ImageService($config['upload_dir'], $config['public_url']);
+$audit = new AuditService($app);
 
-// central exception handler
+// Globale Fehlerbehandlung
 set_exception_handler(function (Throwable $e) use ($app) {
-    $app->logger->error('Unhandled exception', ['message' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+    $app->logger->error('Unhandled exception', [
+        'message' => $e->getMessage(),
+        'trace' => $e->getTraceAsString()
+    ]);
     http_response_code(500);
     echo json_encode(['error' => 'Server error']);
     exit;
 });
 
-// check API key
+// =======================
+// API-Key Überprüfung
+// =======================
 $headers = getallheaders();
 $apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? null;
 if (!$app->checkApiKey($apiKey)) {
@@ -48,12 +58,9 @@ if (!$app->checkApiKey($apiKey)) {
     exit;
 }
 
-// services
-$cache = new CacheService($config['cache']['dir'], $config['cache']['ttl']);
-$imageService = new ImageService($config['upload_dir'], $config['public_url']);
-$audit = new AuditService($app);
-
-// routing (simple)
+// =======================
+// Routing-Analyse
+// =======================
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $script = $_SERVER['SCRIPT_NAME'];
 $base = rtrim(dirname($script), '/');
@@ -66,7 +73,7 @@ $id = $parts[1] ?? null;
 header('Content-Type: application/json; charset=utf-8');
 
 // ===========================
-//  Spezialrouten für /bilder
+//   /bilder - Endpunkte
 // ===========================
 if ($resource === 'bilder') {
     $uploadDir = $config['upload_dir'];
@@ -198,7 +205,7 @@ if ($resource === 'bilder') {
         exit;
     }
 
-    // --- GET /bilder/stats (+ optional ?days=30) ---
+    // --- GET /bilder/stats (+ ?days=30 optional) ---
     if ($method === 'GET' && $id === 'stats') {
         $days = isset($_GET['days']) ? (int)$_GET['days'] : null;
         $cutoff = $days ? time() - ($days * 86400) : null;
@@ -258,8 +265,9 @@ if ($resource === 'bilder') {
     exit;
 }
 
-
-// CRUD handler simple mapping:
+// ===========================
+//   CRUD - generisch
+// ===========================
 if (!$resource || !in_array($resource, $config['allowed_tables'], true)) {
     http_response_code(404);
     echo json_encode(['error' => 'Unknown resource']);
@@ -311,7 +319,7 @@ try {
             $newId = $model->create($data);
             $audit->write($resource, 'CREATE', $newId, $data, null);
             $app->pdo->commit();
-            $cache->delete("list:$resource:100:0"); // naive invalidation
+            $cache->delete("list:$resource:100:0");
             http_response_code(201);
             echo json_encode(['id' => $newId, 'message' => 'Created']);
             exit;
@@ -321,7 +329,7 @@ try {
         }
     }
 
-    if (in_array($method, ['PUT','PATCH'])) {
+    if (in_array($method, ['PUT', 'PATCH'])) {
         if (!$id) {
             http_response_code(400);
             echo json_encode(['error' => 'Missing id']);
@@ -363,7 +371,6 @@ try {
         $app->pdo->beginTransaction();
         try {
             $old = $model->find($id);
-            // delete any referenced images
             if ($old) {
                 foreach ($old as $field => $value) {
                     if (is_string($value) && preg_match('/bild|image|foto|picture/i', $field) && str_starts_with($value, $config['public_url'])) {
@@ -392,7 +399,6 @@ try {
     exit;
 
 } catch (Throwable $e) {
-    // fallback error
     $app->logger->error('Request error', ['message' => $e->getMessage()]);
     http_response_code(500);
     echo json_encode(['error' => 'Server error']);

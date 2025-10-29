@@ -10,7 +10,7 @@ abstract class BaseModel
     protected App $app;
     protected PDO $pdo;
     protected string $table;
-    protected string $primaryKey = "id";
+    protected string $primaryKey = 'id';
     protected bool $autoIncrement = false;
     protected array $fillable = [];
 
@@ -34,7 +34,7 @@ abstract class BaseModel
     public function find(string $id): ?array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM `{$this->table}` WHERE `{$this->primaryKey}` = :id LIMIT 1");
-        $stmt->execute([":id" => $id]);
+        $stmt->execute([':id' => $id]);
         $row = $stmt->fetch();
         return $row ?: null;
     }
@@ -42,8 +42,8 @@ abstract class BaseModel
     public function list(int $limit = 100, int $offset = 0): array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM `{$this->table}` LIMIT :limit OFFSET :offset");
-        $stmt->bindValue(":limit", $limit, PDO::PARAM_INT);
-        $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -59,13 +59,13 @@ abstract class BaseModel
 
         $cols = array_keys($data);
         if (empty($cols)) {
-            throw new \InvalidArgumentException("No fields provided");
+            throw new \InvalidArgumentException('No fields provided');
         }
-        $placeholders = array_map(fn ($c) => ":" . $c, $cols);
+        $placeholders = array_map(fn ($c) => ':' . $c, $cols);
         $sql = 'INSERT INTO `' . $this->table . '` (`' . implode('`,`', $cols) . '`) VALUES (' . implode(',', $placeholders) . ')';
         $stmt = $this->pdo->prepare($sql);
         foreach ($data as $k => $v) {
-            $stmt->bindValue(":" . $k, $v);
+            $stmt->bindValue(':' . $k, $v);
         }
         $stmt->execute();
 

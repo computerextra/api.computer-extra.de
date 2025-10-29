@@ -11,36 +11,35 @@ class ImageService
 
     public function __construct(string $uploadDir, string $publicBase)
     {
-        $this->publicBase = rtrim($publicBase, "/");
-        $this->uploadDir = rtrim($uploadDir, "/");
+        $this->uploadDir = rtrim($uploadDir, '/') . '/';
+        $this->publicBase = rtrim($publicBase, '/');
     }
 
     public function handleUpload(array $file): string
     {
-        if ($file["error"] !== UPLOAD_ERR_OK) {
-            throw new \RuntimeException("Upload error: {$file["error"]}");
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            throw new \RuntimeException('Upload error: ' . $file['error']);
         }
 
-        $allowed = ["image/jpeg" => "jpeg", "image/png" => "png", "image/webp" => "webp", "image/jpg" => "jpg"];
+        $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $file["tmp_name"]);
+        $mime = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
 
         if (!isset($allowed[$mime])) {
             throw new \RuntimeException("Ungültiger Bildtyp ($mime)");
         }
 
-
         $ext = $allowed[$mime];
         $uuid = Uuid::uuid4()->toString();
-        $filename = $uuid . "." . $ext;
+        $filename = $uuid . '.' . $ext;
         $path = $this->uploadDir . $filename;
+
         if (!move_uploaded_file($file['tmp_name'], $path)) {
             throw new \RuntimeException('Fehler beim Speichern der Datei');
         }
-
         chmod($path, 0644);
-        return $this->publicBase . "/" . $filename;
+        return $this->publicBase . '/' . $filename;
     }
 
     public function deleteByUrl(string $url): bool
@@ -53,11 +52,11 @@ class ImageService
         return false;
     }
 
-    public function listFiles(array $patterns = ["jpg", "jpeg", "png", "webp"]): array
+    public function listFiles(array $patterns = ['jpg','jpeg','png','webp']): array
     {
         $globs = [];
         foreach ($patterns as $p) {
-            $globs[] = $this->uploadDir . "/*." . $p;
+            $globs[] = $this->uploadDir . '/*.' . $p;
         }
         $files = [];
         foreach ($globs as $g) {
@@ -67,5 +66,4 @@ class ImageService
         }
         return $files;
     }
-
 }

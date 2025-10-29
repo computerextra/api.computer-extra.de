@@ -9,7 +9,7 @@ class CacheService
 
     public function __construct(string $dir, int $ttl = 60)
     {
-        $this->dir = rtrim($dir, "/");
+        $this->dir = rtrim($dir, '/');
         $this->ttl = $ttl;
         if (!is_dir($this->dir)) {
             mkdir($this->dir, 0777, true);
@@ -18,7 +18,7 @@ class CacheService
 
     private function file(string $key): string
     {
-        return $this->dir . "/" . md5($key) . ".json";
+        return $this->dir . '/' . md5($key) . '.json';
     }
 
     public function get(string $key): mixed
