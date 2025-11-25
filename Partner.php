@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once dirname(__FILE__) . "config.php";
-require_once dirname(__FILE__) . "helper.php";
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "config.php";
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "helper.php";
 
 
 header("Access-Control-Allow-Origin: *");

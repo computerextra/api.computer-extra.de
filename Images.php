@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . PATH_SEPARATOR . "config.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "config.php";
 
 function uploadImage($file)
 {
