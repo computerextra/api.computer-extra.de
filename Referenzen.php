@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "config.php";
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "helper.php";
-
+$config = new Config();
 
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
@@ -23,13 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 header('Content-Type: application/json; charset=utf-8');
 
-$headers = getallheaders();
-$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? null;
-if (!checkApiKey($apiKey)) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit;
-}
+
 
 $method = $_SERVER["REQUEST_METHOD"];
 [$_POST, $_FILES] = request_parse_body();
@@ -55,12 +47,12 @@ $queries = [
 switch ($method) {
     case "GET":
         if (!empty($id) || isset($id)) {
-            $stmt = $pdo->prepare($queries['READ_ONE']);
-            $stmt = $pdo->prepare($query);
+            $stmt = $config->pdo->prepare($queries['READ_ONE']);
+
             $stmt->execute([":id" => $id]);
         } else {
-            $stmt = $pdo->prepare($queries['READ_ALL']);
-            $stmt = $pdo->prepare($query);
+            $stmt = $config->pdo->prepare($queries['READ_ALL']);
+
             $stmt->execute();
         }
         $res = $stmt->fetchAll();
@@ -69,99 +61,99 @@ switch ($method) {
 
     case "POST":
     case "PATCH":
-        // Update
-        if (empty($id) || !isset($id)) {
-            http_response_code(400);
-            echo json_encode(["error" => "id is missing"]);
-            exit;
-        }
-        if (empty($Name)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Name is missing"]);
-            exit;
-        }
-        if (empty($Webseite)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Webseite is missing"]);
-            exit;
-        }
+    // Update
+    // if (empty($id) || !isset($id)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "id is missing"]);
+    //     exit;
+    // }
+    // if (empty($Name)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "Name is missing"]);
+    //     exit;
+    // }
+    // if (empty($Webseite)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "Webseite is missing"]);
+    //     exit;
+    // }
 
-        if (empty($image)) {
-            http_response_code(400);
-            echo json_encode(["error" => "image is missing"]);
-            exit;
-        }
-        $filename = uploadImage($image);
-        if ($filename == null) {
-            http_response_code(500);
-            echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
-            exit;
-        }
+    // if (empty($image)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "image is missing"]);
+    //     exit;
+    // }
+    // $filename = uploadImage($image);
+    // if ($filename == null) {
+    //     http_response_code(500);
+    //     echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
+    //     exit;
+    // }
 
-        $stmt = $pdo->prepare($queries['UPDATE']);
-        $stmt->execute([
-            ":id" => $id,
-            ":Name" => $Name,
-            ":Webseite" => $Webseite,
-            ":Bild" => $filename,
-            ":Online" => $Online,
-        ]);
-        echo json_encode(["message" => "OK"]);
-        exit;
+    // $stmt = $pdo->prepare($queries['UPDATE']);
+    // $stmt->execute([
+    //     ":id" => $id,
+    //     ":Name" => $Name,
+    //     ":Webseite" => $Webseite,
+    //     ":Bild" => $filename,
+    //     ":Online" => $Online,
+    // ]);
+    // echo json_encode(["message" => "OK"]);
+    // exit;
 
     case "PUT":
-        // Create
-        if (!empty($id) || isset($id)) {
-            http_response_code(400);
-            echo json_encode(["error" => "id is given"]);
-            exit;
-        }
-        if (empty($Name)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Name is missing"]);
-            exit;
-        }
-        if (empty($Webseite)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Webseite is missing"]);
-            exit;
-        }
+    // Create
+    // if (!empty($id) || isset($id)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "id is given"]);
+    //     exit;
+    // }
+    // if (empty($Name)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "Name is missing"]);
+    //     exit;
+    // }
+    // if (empty($Webseite)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "Webseite is missing"]);
+    //     exit;
+    // }
 
-        if (empty($image)) {
-            http_response_code(400);
-            echo json_encode(["error" => "image is missing"]);
-            exit;
-        }
-        $filename = uploadImage($image);
-        if ($filename == null) {
-            http_response_code(500);
-            echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
-            exit;
-        }
+    // if (empty($image)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "image is missing"]);
+    //     exit;
+    // }
+    // $filename = uploadImage($image);
+    // if ($filename == null) {
+    //     http_response_code(500);
+    //     echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
+    //     exit;
+    // }
 
-        $id = CUIDGenerator::gnerateCUID();
-        $stmt = $pdo->prepare($queries['INSERT']);
+    // $id = CUIDGenerator::gnerateCUID();
+    // $stmt = $pdo->prepare($queries['INSERT']);
 
-        $stmt->execute([
-            ":id" => $id,
-            ":Name" => $Name,
-            ":Webseite" => $Webseite,
-            ":Bild" => $filename,
-            ":Online" => $Online,
-        ]);
-        echo json_encode(["message" => "OK"]);
-        exit;
+    // $stmt->execute([
+    //     ":id" => $id,
+    //     ":Name" => $Name,
+    //     ":Webseite" => $Webseite,
+    //     ":Bild" => $filename,
+    //     ":Online" => $Online,
+    // ]);
+    // echo json_encode(["message" => "OK"]);
+    // exit;
 
     case "DELETE":
-        if (empty($id) || !isset($id)) {
-            http_response_code(400);
-            echo json_encode(["error" => "id is missing"]);
-            exit;
-        }
-        $stmt = $pdo->prepare($queries['DELETE']);
-        $stmt->execute([":id" => $id]);
-        echo json_encode(["message" => "OK"]);
-        exit;
+    // if (empty($id) || !isset($id)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "id is missing"]);
+    //     exit;
+    // }
+    // $stmt = $pdo->prepare($queries['DELETE']);
+    // $stmt->execute([":id" => $id]);
+    // echo json_encode(["message" => "OK"]);
+    // exit;
 
     default:
         http_response_code(405);

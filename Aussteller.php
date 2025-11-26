@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "config.php";
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "helper.php";
+$config = new Config();
 
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
@@ -21,14 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 header('Content-Type: application/json; charset=utf-8');
-
-$headers = getallheaders();
-$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? null;
-if (!checkApiKey($apiKey)) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit;
-}
 
 $method = $_SERVER["REQUEST_METHOD"];
 [$_POST, $_FILES] = request_parse_body();
@@ -53,12 +44,10 @@ $queries = [
 switch ($method) {
     case "GET":
         if (!empty($Artikelnummer) || isset($Artikelnummer)) {
-            $stmt = $pdo->prepare($queries['READ_ONE']);
-            $stmt = $pdo->prepare($query);
+            $stmt = $config->pdo->prepare($queries['READ_ONE']);
             $stmt->execute([":Artikelnummer" => $Artikelnummer]);
         } else {
-            $stmt = $pdo->prepare($queries['READ_ALL']);
-            $stmt = $pdo->prepare($query);
+            $stmt = $config->pdo->prepare($queries['READ_ALL']);
             $stmt->execute();
         }
         $res = $stmt->fetchAll();
@@ -67,31 +56,31 @@ switch ($method) {
 
     case "POST":
     case "PATCH":
-        // Update
-        if (empty($Artikelnummer) || !isset($Artikelnummer)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Artikelnummer is missing"]);
-            exit;
-        }
-        if (empty($image)) {
-            http_response_code(400);
-            echo json_encode(["error" => "image is missing"]);
-            exit;
-        }
-        $filename = uploadImage($image);
-        if ($filename == null) {
-            http_response_code(500);
-            echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
-            exit;
-        }
+    // Update
+    // if (empty($Artikelnummer) || !isset($Artikelnummer)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "Artikelnummer is missing"]);
+    //     exit;
+    // }
+    // if (empty($image)) {
+    //     http_response_code(400);
+    //     echo json_encode(["error" => "image is missing"]);
+    //     exit;
+    // }
+    // $filename = uploadImage($image);
+    // if ($filename == null) {
+    //     http_response_code(500);
+    //     echo json_encode(["error" => "bild konnte nicht hochgeladen werden"]);
+    //     exit;
+    // }
 
-        $stmt = $pdo->prepare($queries['UPDATE']);
-        $stmt->execute([
-            ":Artikelnummer" => $Artikelnummer,
-            ":Bild" => $filename,
-        ]);
-        echo json_encode(["message" => "OK"]);
-        exit;
+    // $stmt = $pdo->prepare($queries['UPDATE']);
+    // $stmt->execute([
+    //     ":Artikelnummer" => $Artikelnummer,
+    //     ":Bild" => $filename,
+    // ]);
+    // echo json_encode(["message" => "OK"]);
+    // exit;
 
     case "PUT":
         // Create
