@@ -47,7 +47,7 @@ function db_connect(): PDO
     $port = (int) (envVar('DB_PORT', 3306));
     $db = (string) (envVar('DB_NAME', 'image_upload'));
     $user = (string) (envVar('DB_USER', 'root'));
-    $pass = (string) (envVar('DB_PASS', ''));
+    $pass = (string) (envVar('DB_PASSWORD', ''));
     $charset = (string) (envVar('DB_CHARSET', 'utf8mb4'));
 
     $dsn = "mysql:host={$host};port={$port};dbname={$db};charset={$charset}";
