@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 declare(strict_types=1);
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 ensurePost();
 
@@ -12,50 +12,54 @@ ensurePost();
 $MAX_BYTES = 20 * 1024 * 1024;
 
 // Validate presence
-if (!isset($_FILES["file"]) || !isset($_POST["password"])) {
-    respondWithError("Etwas ist schiefgelaufen");
+if (!isset($_FILES['file']) || !isset($_POST['password'])) {
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-$password = (string) ($_POST["password"] ?? "");
-if ($password === "" || mb_strlen($password) < 6) {
-    respondWithError("Etwas ist schiefgelaufen");
+$password = (string) ($_POST['password'] ?? '');
+if ($password === '' || mb_strlen($password) < 6) {
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-$upload = $_FILES["file"];
-if (!is_array($upload) || (int) $upload["error"] !== UPLOAD_ERR_OK) {
-    respondWithError("Etwas ist schiefgelaufen");
+$upload = $_FILES['file'];
+if (!is_array($upload) || (int) $upload['error'] !== UPLOAD_ERR_OK) {
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-// Enforce Size
-$size = (int) ($upload["size"] ?? 0);
+// Enforce size
+$size = (int) ($upload['size'] ?? 0);
 if ($size <= 0 || $size > $MAX_BYTES) {
-    respondWithError("Etwas ist schiefgelaufen");
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-// determine safe mime using finfo
-$tmpPath = (string) $upload["tmp_name"];
+// Determine safe mime using finfo
+$tmpPath = (string) $upload['tmp_name'];
 $finfo = new finfo(FILEINFO_MIME_TYPE);
 $mime = $finfo->file($tmpPath) ?: null;
 
-$originalName = $upload["name"];
-$clientName = (string) ($upload["name"] ?? "");
+// Optional: basic allowlist (commented). If desired, define allowed MIME types.
+// $allowed = ['image/png','image/jpeg','application/pdf','text/plain'];
+// if ($mime !== null && !in_array($mime, $allowed, true)) { respondWithError('Etwas ist schiefgelaufen.'); }
+
+$originalName = $upload['name'];
+$clientName = (string) ($upload['name'] ?? '');
 $clientName = basename(trim($clientName));
-if ($originalName === "") {
-    $originalName = "unbenannt";
+if ($originalName === '') {
+    $originalName = 'unbenannt';
 }
 
-// Generate random has filename and keep original extension (if any)
+// Generate random hash filename and keep original extension (if any)
 $hash = generateRandomHash(16); // 32 hex chars
 $ext = pathinfo($originalName, PATHINFO_EXTENSION);
-$storedFilename = $ext !== "" ? ($hash . "." . $ext) : $hash;
+$storedFilename = $ext !== '' ? ($hash . '.' . $ext) : $hash;
 $storedPath = STORAGE_PATH . DIRECTORY_SEPARATOR . $storedFilename;
 
 // Move uploaded file
-if (!move_uploaded_file($tmpPath, $storedFilename)) {
-    respondWithError("Etwas ist schiefgelaufen");
+if (!move_uploaded_file($tmpPath, $storedPath)) {
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-// Tighten permissions (best effort on non-windows)
+// Tighten permissions (best effort on non-Windows)
 @chmod($storedPath, 0640);
 
 // Store metadata in DB with password hash
@@ -73,9 +77,10 @@ $ok = $stmt->execute([
 
 if (!$ok) {
     @unlink($storedPath);
-    respondWithError("Etwas ist schiefgelaufen");
+    respondWithError('Etwas ist schiefgelaufen.');
 }
 
-// Repond to user with the hash
-$url = "https://upload.computer-extra.de/" . htmlspecialchars($hash, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+// Respond to user with the hash
+http_response_code(200);
+$url = "https://upload.computer-extra.de/" . htmlspecialchars($hash, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 header("Location: $url");
