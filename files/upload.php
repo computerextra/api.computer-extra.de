@@ -6,14 +6,6 @@ error_reporting(E_ALL);
 declare(strict_types=1);
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
-// CORS Headers für alle Clients erlauben
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json; charset=UTF-8");
-
-
-
 ensurePost();
 
 // 20 MB in bytes
@@ -85,5 +77,5 @@ if (!$ok) {
 }
 
 // Repond to user with the hash
-http_response_code(200);
-echo json_encode(htmlspecialchars($hash, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8"));
+$url = "https://upload.computer-extra.de/" . htmlspecialchars($hash, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+header("Location: $url");
