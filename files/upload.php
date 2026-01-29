@@ -4,13 +4,15 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 declare(strict_types=1);
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 // CORS Headers für alle Clients erlauben
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json; charset=UTF-8");
 
 
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 ensurePost();
 

@@ -7,6 +7,11 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json; charset=UTF-8");
+
 ensurePost();
 
 $hash = (string) ($_POST["hash"] ?? '');
