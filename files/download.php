@@ -17,18 +17,22 @@ $stmt = $pdo->prepare('SELECT file_hash, password_hash, original_name, mime_type
 $stmt->execute([":file_hash" => $hash]);
 $row = $stmt->fetch();
 
+$url = "https://upload.computer-extra.de/Fehler";
 // Generic failure to avoid revealing if hash or password was wrong
 if (!$row || !is_array($row)) {
-    respondWithError("Kein Eintrag", 404);
+    header("Location: $url");
+    exit;
 }
 
 if (!password_verify($password, (string) $row["password_hash"])) {
-    respondWithError("Unotherized", 403);
+    header("Location: $url");
+    exit;
 }
 
 $path = (string) $row["stored_path"];
 if (!is_file($path) || !is_readable($path)) {
-    respondWithError("Datei Fehler", 410);
+    header("Location: $url");
+    exit;
 }
 
 // send file for download
@@ -49,7 +53,8 @@ header('X-Content-Type-Options: nosniff');
 
 $fp = fopen($path, 'rb');
 if ($fp === false) {
-    respondWithError('Etwas ist schiefgelaufen.', 500);
+    header("Location: $url");
+    exit;
 }
 fpassthru($fp);
 fclose($fp);
