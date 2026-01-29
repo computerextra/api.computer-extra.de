@@ -18,7 +18,7 @@ if ($hash === '' || $password === '') {
 }
 
 $pdo = db_connect();
-$stmt = $pdo->prepare('SELECT file_hash, password_hash, original_name, mime_type, size_bytes, stored_path FROM files WHERE file_hash = :file_hash LIMIT 1');
+$stmt = $pdo->prepare('SELECT id, file_hash, password_hash, original_name, mime_type, size_bytes, stored_path FROM files WHERE file_hash = :file_hash LIMIT 1');
 $stmt->execute([":file_hash" => $hash]);
 $row = $stmt->fetch();
 
