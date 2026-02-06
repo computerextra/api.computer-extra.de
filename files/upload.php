@@ -47,7 +47,8 @@ if ($originalName === '') {
 // Generate random hash filename and keep original extension (if any)
 $hash = generateRandomHash(16); // 32 hex chars
 $ext = pathinfo($originalName, PATHINFO_EXTENSION);
-$storedFilename = $ext !== '' ? ($hash . '.' . $ext) : $hash;
+// $storedFilename = $ext !== '' ? ($hash . '.' . $ext) : $hash;
+$storedFilename = $hash;
 $storedPath = STORAGE_PATH . DIRECTORY_SEPARATOR . $storedFilename;
 
 // Move uploaded file
