@@ -13,6 +13,8 @@ define('PUBLIC_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'files');
 define('DATA_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'data');
 define('STORAGE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'storage');
 
+define('FILE_ENCRYPTION_BLOCKS', 10000);
+
 // Ensure required directories exist
 @mkdir(DATA_PATH, 0775, true);
 @mkdir(STORAGE_PATH, 0775, true);
@@ -103,4 +105,59 @@ function ensurePost(): void
 }
 
 
+/**
+ * @param string $source Path of the unencrypted file
+ * @param string $dest Path of the encrypted file to create
+ * @param string $key Encryption Key
+ * @return void
+ */
+function encryptFile($source, $dest, $key)
+{
+    $cypher = "aes-256-cbc";
+    $ivLength = openssl_cipher_iv_length($cypher);
+    $iv = openssl_random_pseudo_bytes($ivLength);
 
+    $fpSource = fopen($source, "rb");
+    $fpDest = fopen($dest, "w");
+
+    fwrite($fpDest, $iv);
+
+    while (!feof($fpSource)) {
+        $plaintext = fread($fpSource, $ivLength * FILE_ENCRYPTION_BLOCKS);
+        $cyphertext = openssl_encrypt($plaintext, $cypher, $key, OPENSSL_RAW_DATA, $iv);
+        $iv = substr($cyphertext, 0, $ivLength);
+
+        fwrite($fpDest, $cyphertext);
+    }
+
+    fclose($fpSource);
+    fclose($fpDest);
+}
+
+/**
+ * @param string $source Path of the encrypted file
+ * @param string $dest Path of the decrypted file
+ * @param string $key Encryption key
+ * @return void
+ */
+function decryptFile($source, $dest, $key)
+{
+    $cipher = 'aes-256-cbc';
+    $ivLenght = openssl_cipher_iv_length($cipher);
+
+    $fpSource = fopen($source, 'rb');
+    $fpDest = fopen($dest, 'w');
+
+    $iv = fread($fpSource, $ivLenght);
+
+    while (!feof($fpSource)) {
+        $ciphertext = fread($fpSource, $ivLenght * (FILE_ENCRYPTION_BLOCKS + 1));
+        $plaintext = openssl_decrypt($ciphertext, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+        $iv = substr($ciphertext, 0, $ivLenght);
+
+        fwrite($fpDest, $plaintext);
+    }
+
+    fclose($fpSource);
+    fclose($fpDest);
+}

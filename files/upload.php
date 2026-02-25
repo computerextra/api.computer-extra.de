@@ -51,10 +51,11 @@ $ext = pathinfo($originalName, PATHINFO_EXTENSION);
 $storedFilename = $hash;
 $storedPath = STORAGE_PATH . DIRECTORY_SEPARATOR . $storedFilename;
 
+encryptFile($tmpPath, $storedPath, $password);
 // Move uploaded file
-if (!move_uploaded_file($tmpPath, $storedPath)) {
-    respondWithError('Etwas ist schiefgelaufen.');
-}
+// if (!move_uploaded_file($tmpPath, $storedPath)) {
+//     respondWithError('Etwas ist schiefgelaufen.');
+// }
 
 // Tighten permissions (best effort on non-Windows)
 @chmod($storedPath, 0640);

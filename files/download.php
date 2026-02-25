@@ -39,6 +39,8 @@ if (!is_file($path) || !is_readable($path)) {
 $mime = $row["mime_type"] ?: "application/octet-stream";
 $downloadName = $row["original_name"] ?: ("datei-" . $row["file_hash"]);
 
+decryptFile($path, $downloadName, $password);
+
 // clean output buffers
 while (ob_get_level() > 0) {
     ob_get_clean();
@@ -48,10 +50,10 @@ header('Content-Description: File Transfer');
 header('Content-Type: ' . $mime);
 header('Content-Disposition: attachment; filename="' . rawurlencode($downloadName) . '"');
 header('Content-Transfer-Encoding: binary');
-header('Content-Length: ' . (string) filesize($path));
+header('Content-Length: ' . (string) filesize($downloadName));
 header('X-Content-Type-Options: nosniff');
 
-$fp = fopen($path, 'rb');
+$fp = fopen($downloadName, 'rb');
 if ($fp === false) {
     header("Location: $url");
     exit;
