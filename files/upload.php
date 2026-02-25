@@ -4,8 +4,8 @@ require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 ensurePost();
 
-// 20 MB in bytes
-$MAX_BYTES = 20 * 1024 * 1024;
+// 50 MB in bytes
+$MAX_BYTES = 50 * 1024 * 1024;
 
 // Validate presence
 if (!isset($_FILES['file']) || !isset($_POST['password'])) {
