@@ -33,7 +33,7 @@ try {
 
 // Abfrage ausführen
 try {
-    $stmt = $pdo->prepare("SELECT id, name, short, image, sex, focus, abteilungId FROM `Mitarbeiter` WHERE short IS NOT NULL AND sex IS NOT NULL AND mail IS NOT NULL AND abteilungId IS NOT NULL ORDER BY name ASC ");
+    $stmt = $pdo->prepare("SELECT id, name, short, image, sex, focus, abteilungId FROM `Mitarbeiter` WHERE online = 1;");
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
