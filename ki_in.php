@@ -39,6 +39,8 @@ try {
     // Erfolgreiche Antwort
     http_response_code(200);
 } catch (PDOException $e) {
+    file_put_contents("error.txt", $data);
+    file_put_contents("error.txt", $e, FILE_APPEND);
     http_response_code(500);
     echo json_encode(["error" => "Datenbankabfrage fehlgeschlagen: " . $e->getMessage()]);
 }
