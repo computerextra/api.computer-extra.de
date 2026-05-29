@@ -33,11 +33,17 @@ try {
 
 // Abfrage ausführen
 try {
-    $stmt = $pdo->prepare("insert into anruf (anrufer_name, transcript, angerufen, anrufer_nummer, ansprechpartner) values (:anrufer_name, :transcript, :angerufen, :anrufer_nummer, :ansprechpartner)", [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-    $stmt->execute(["anrufer_name" => $data["anrufer_name"], "transcript" => $data["transcript"], "angerufen" => $data["angerufen"], "anrufer_nummer" => $data["anrufer_nummer"], "ansprechpartner" => $data["ansprechpartner"]]);
+    $stmt = $pdo->prepare("select * from anruf where anrufer_nummer = :nummer;", [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $stmt->execute(["nummer" => $data["anrufer_nummer"]]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Lösche den Eintrag aus der Datenbank!
+    $stmt = $pdo->prepare("delete from anruf where id = :id;");
+    $stmt->execute(["id" => $result["id"]]);
 
     // Erfolgreiche Antwort
     http_response_code(200);
+    echo json_encode($result);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["error" => "Datenbankabfrage fehlgeschlagen: " . $e->getMessage()]);
