@@ -18,6 +18,7 @@ $dotenv->load();
 
 $data = file_get_contents('php://input');
 
+file_put_contents("input.txt", file_get_contents('php://input'));
 try {
     $pdo = new PDO(
         "mysql:host=" . $_ENV['KI_DB_HOST'] . ";dbname=" . $_ENV['KI_DB_NAME'] . ";charset=utf8",
