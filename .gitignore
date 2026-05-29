@@ -3,3 +3,4 @@ vendor/
 uploads/*.pdf
 AVV/*.pdf
 test.txt
+input.txt

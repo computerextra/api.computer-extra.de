@@ -6,6 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    file_put_contents("error1.txt", "Nur POST-Methoden sind erlaubt");
     http_response_code(405);
     echo json_encode(["error" => "Nur POST-Methoden sind erlaubt"]);
     exit();
@@ -29,7 +30,7 @@ try {
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    file_put_contents("error.txt", $e);
+    file_put_contents("error2.txt", $e);
     http_response_code(500);
     echo json_encode(["error" => "Datenbankverbindung fehlgeschlagen: " . $e->getMessage()]);
     exit();
@@ -43,8 +44,8 @@ try {
     // Erfolgreiche Antwort
     http_response_code(200);
 } catch (PDOException $e) {
-    file_put_contents("error.txt", $data, FILE_APPEND);
-    file_put_contents("error.txt", $e, FILE_APPEND);
+    file_put_contents("error3.txt", $data);
+    file_put_contents("error3.txt", $e, FILE_APPEND);
     http_response_code(500);
     echo json_encode(["error" => "Datenbankabfrage fehlgeschlagen: " . $e->getMessage()]);
 }
