@@ -111,7 +111,7 @@ try {
         'IP-Adresse: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unbekannt'),
         'User-Agent: ' . ($_SERVER['HTTP_USER_AGENT'] ?? 'unbekannt'),
     ];
-    $message = implode("\n", $messageLines);
+    $message = implode("<br>", $messageLines);
     $mail->Body = $message;
     $mail->send();
 
