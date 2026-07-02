@@ -68,52 +68,58 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to = 'sohrab.djahed@computer-extra.de';
-$bcc = 'johannes.kirchner@computer-extra.de';
-$subject = 'PhoneDocs: Neue Reparaturanfrage über die Webseite';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$safeName = str_replace(["\r", "\n"], ' ', $name);
-$safeEmail = str_replace(["\r", "\n"], ' ', $email);
+try {
+    $mail = new PHPMailer(true);
+    $mail->setLanguage("de", "/PHPMailer/language/");
 
-$messageLines = [
-    'Es wurde eine neue Reparaturanfrage ueber die Webseite gesendet.',
-    '',
-    'Name: ' . $name,
-    'Telefonnummer: ' . ($telefonnummer !== '' ? $telefonnummer : '-'),
-    'E-Mail: ' . $email,
-    'Geraet: ' . $geraet,
-    'Fehler: ' . $fehler,
-    'Fehlerbeschreibung:',
-    $fehlerbeschreibung,
-    '',
-    'Datenschutz bestaetigt: Ja',
-    'Zeitpunkt: ' . date('d.m.Y H:i:s'),
-    'IP-Adresse: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unbekannt'),
-    'User-Agent: ' . ($_SERVER['HTTP_USER_AGENT'] ?? 'unbekannt'),
-];
-$message = implode("\n", $messageLines);
+    $mail->isSMTP();
+    $mail->Host = $_ENV["SMTP_HOST"];
+    $mail->SMTPAuth = true;
+    $mail->Username = $_ENV["SMTP_USER"];
+    $mail->Password = $_ENV["SMTP_PASSWORD"];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = $_ENV["SMTP_PORT"];
 
-$headers = [
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'From: PhoneDocs <noreply@computer-extra.de>',
-    'Reply-To: ' . $safeName . ' <' . $safeEmail . '>',
-    'Bcc: ' . $bcc,
-    'X-Mailer: PHP/' . phpversion(),
-];
+    $mail->setFrom($_ENV["SMTP_FROM"], "PhoneDocs");
+    $mail->addAddress('sohrab.djahed@computer-extra.de');
+    $mail->addBCC('johannes.kirchner@computer-extra.de');
+    $mail->isHTML(true);
+    $mail->Subject = "PhoneDocs: Neue Reparaturanfrage über die Webseite";
+    $mail->CharSet = "UTF-8";
 
-$sent = mail($to, $subject, $message, implode("\r\n", $headers));
+    $messageLines = [
+        'Es wurde eine neue Reparaturanfrage ueber die Webseite gesendet.',
+        '',
+        'Name: ' . $name,
+        'Telefonnummer: ' . ($telefonnummer !== '' ? $telefonnummer : '-'),
+        'E-Mail: ' . $email,
+        'Geraet: ' . $geraet,
+        'Fehler: ' . $fehler,
+        'Fehlerbeschreibung:',
+        $fehlerbeschreibung,
+        '',
+        'Datenschutz bestaetigt: Ja',
+        'Zeitpunkt: ' . date('d.m.Y H:i:s'),
+        'IP-Adresse: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unbekannt'),
+        'User-Agent: ' . ($_SERVER['HTTP_USER_AGENT'] ?? 'unbekannt'),
+    ];
+    $message = implode("\n", $messageLines);
+    $mail->Body = $message;
+    $mail->send();
 
-if (!$sent) {
+    http_response_code(200);
+    echo json_encode([
+        'ok' => true,
+    ]);
+} catch (Exception $e) {
     http_response_code(500);
     echo json_encode([
         'ok' => false,
         'error' => 'mail_send_failed',
+        'message' => $mail->ErrorInfo,
     ]);
     exit;
 }
-
-http_response_code(200);
-echo json_encode([
-    'ok' => true,
-]);
