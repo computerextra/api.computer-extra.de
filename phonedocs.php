@@ -68,8 +68,9 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to = 'johannes.kirchner@computer-extra.de';
-$subject = 'Neue Reparaturanfrage ueber die Webseite';
+$to = 'sohrab.djahed@computer-extra.de';
+$bcc = 'johannes.kirchner@computer-extra.de';
+$subject = 'PhoneDocs: Neue Reparaturanfrage über die Webseite';
 
 $safeName = str_replace(["\r", "\n"], ' ', $name);
 $safeEmail = str_replace(["\r", "\n"], ' ', $email);
@@ -86,7 +87,7 @@ $messageLines = [
     $fehlerbeschreibung,
     '',
     'Datenschutz bestaetigt: Ja',
-    'Zeitpunkt: ' . date('Y-m-d H:i:s'),
+    'Zeitpunkt: ' . date('d.m.Y H:i:s'),
     'IP-Adresse: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unbekannt'),
     'User-Agent: ' . ($_SERVER['HTTP_USER_AGENT'] ?? 'unbekannt'),
 ];
@@ -95,8 +96,9 @@ $message = implode("\n", $messageLines);
 $headers = [
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
-    'From: Website Reparaturanfrage <noreply@api.computer-extra.de>',
+    'From: PhoneDocs <noreply@computer-extra.de>',
     'Reply-To: ' . $safeName . ' <' . $safeEmail . '>',
+    'Bcc: ' . $bcc,
     'X-Mailer: PHP/' . phpversion(),
 ];
 
