@@ -88,6 +88,7 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = $_ENV["SMTP_PORT"];
 
+    $mail->addReplyTo($email, $name);
     $mail->setFrom($_ENV["SMTP_FROM"], "PhoneDocs");
     $mail->addAddress('sohrab.djahed@computer-extra.de');
     $mail->addBCC('johannes.kirchner@computer-extra.de');
