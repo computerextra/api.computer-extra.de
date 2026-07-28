@@ -33,7 +33,7 @@ try {
 
 // Abfrage ausführen
 try {
-    $stmt = $pdo->prepare("SELECT id, name, short, image, sex, focus, abteilungId FROM `Mitarbeiter` WHERE online = 1;");
+    $stmt = $pdo->prepare("SELECT id, name, short, image, sex, focus, abteilungId, Gruppenwahl FROM `Mitarbeiter` WHERE online = 1;");
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
