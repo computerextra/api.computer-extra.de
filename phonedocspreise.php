@@ -23,7 +23,12 @@ require_once __DIR__ . '/bootstrap.php';
 
 try {
     $preise = db_connect()
-        ->query('SELECT id, hersteller, geraet, reparatur, preis FROM phonedocs')
+        ->query(
+            'SELECT p.id, h.name AS hersteller, g.name AS geraet, p.reparatur, p.preis
+             FROM phonedocs AS p
+             INNER JOIN PhonedocGeraet AS g ON g.id = p.geraetId
+             INNER JOIN PhonedocHersteller AS h ON h.id = g.herstellerId'
+        )
         ->fetchAll();
 
     echo json_encode(
