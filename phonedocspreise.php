@@ -24,10 +24,24 @@ require_once __DIR__ . '/bootstrap.php';
 try {
     $preise = db_connect()
         ->query(
-            'SELECT p.id, h.name AS hersteller, g.name AS geraet, p.reparatur, p.preis
-             FROM phonedocs AS p
-             INNER JOIN PhonedocGeraet AS g ON g.id = p.geraetId
-             INNER JOIN PhonedocHersteller AS h ON h.id = g.herstellerId'
+            'SELECT
+                id,
+                model,
+                display_incell_lcd,
+                display_soft_oled_nachbau,
+                display_refurbished_original,
+                display_original_neu,
+                alternativ_akku_ios_faehig,
+                akku_original,
+                ladebuchse_reinigung,
+                ladebuchse_austausch,
+                backcover,
+                kamera,
+                kamera_glas_linse,
+                sub_to_main_flex,
+                lautsprecher
+             FROM phonedocs
+             ORDER BY model ASC'
         )
         ->fetchAll();
 
