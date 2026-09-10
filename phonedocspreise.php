@@ -38,7 +38,6 @@ try {
                 backcover,
                 kamera,
                 kamera_glas_linse,
-                sub_to_main_flex,
                 lautsprecher
              FROM phonedocs
              ORDER BY model ASC'
