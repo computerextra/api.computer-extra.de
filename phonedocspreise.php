@@ -38,7 +38,8 @@ try {
                 backcover,
                 kamera,
                 kamera_glas_linse,
-                lautsprecher
+                lautsprecher,
+                kostenvoranschlag
              FROM phonedocs
              ORDER BY model ASC'
         )
